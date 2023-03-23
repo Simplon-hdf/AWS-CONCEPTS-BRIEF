@@ -100,4 +100,38 @@
 
 # 💥💥 Troubleshooting, if you use mac M1 as a local machine to build your image, after run: sudo docker run -d --rm -p 80:80 crawan/aws-concepts-1, you may face this warning: 🔥WARNING: The requested image's platform (linux/arm64/v8) does not match the detected host platform (linux/amd64) and no specific platform was requested🔥,
 
-## So to solve this warning, you need just to run: sudo docker run -d --rm -p 80:80 --platform linux/amd64 crawan/aws-concepts-1, and we good to go ⛷️⛷️⛷️
+## So to solve this warning, you need just to run: sudo docker run -d --rm -p 80:80 --platform linux/amd64 crawan/aws-concepts-1, or docker buildx build --platform=linux/amd64 -t psql-compose .,(the las one is the best solution) and we good to go ⛷️⛷️⛷️
+
+# Run the built image in the browser :
+
+## To access the application from the browser w'll use the Public IPv4 address that exist in the details of our istance in aws account, but by default onley connection allowed is typ SSH connection, so we need to allow http trafic in order to rich to the application from browser, so we need to edit th inbound rules in order to allow http trafic fom everywhere
+
+### 1\ Click the instance that we want change it's the securty group
+
+### 2\ On the details, click on the security group name, to take as to the page of that security group
+
+### 3\ Then we click on inbound rules
+
+### 4\ Then click Edit inbound rules
+
+### 5\ Then click Add rule
+
+### 6\ From type we chose HTTP
+
+### 7\ From Source , we choose anywhere-IP4
+
+### 8\ Click save
+
+### 9\ Now you can access the application from the browser by running the Public IP address of your instance
+
+# Last thing, build the docker comose file inside the remote machine:
+
+## 1) Install the docker-compose
+
+### sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose; sudo chmod +x /usr/local/bin/docker-compose ;docker-compose version
+
+## 2) Build the docker-compoe.yml file using vim editor having the built image and DB image image
+
+## 2) Run docker-compose up
+
+# 🪂\_**\_ The end of Elastic computing cloud tutorial \_\_** 🪂
